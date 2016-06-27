@@ -91,7 +91,7 @@ def _get_grpc_custom_bdist(decorated_basename, target_bdist_basename):
   except IOError as error:
     raise CommandError(
         '{}\n\nCould not find the bdist {}: {}'
-            .format(traceback.format_exc(), decorated_path, error.message))
+            .format(traceback.format_exc(), decorated_path, error))
   # Our chosen local bdist path.
   bdist_path = target_bdist_basename + GRPC_CUSTOM_BDIST_EXT
   try:
@@ -100,7 +100,7 @@ def _get_grpc_custom_bdist(decorated_basename, target_bdist_basename):
   except IOError as error:
     raise CommandError(
         '{}\n\nCould not write grpcio bdist: {}'
-            .format(traceback.format_exc(), error.message))
+            .format(traceback.format_exc(), error))
   return bdist_path
 
 
@@ -228,7 +228,7 @@ class BuildPy(build_py.build_py):
     try:
       self.run_command('build_proto_modules')
     except CommandError as error:
-      sys.stderr.write('warning: %s\n' % error.message)
+      sys.stderr.write('warning: %s\n' % error)
     self.run_command('build_project_metadata')
     build_py.build_py.run(self)
 
